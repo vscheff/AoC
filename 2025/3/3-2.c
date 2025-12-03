@@ -6,8 +6,7 @@ size_t get_largest(char *, ssize_t, unsigned, ssize_t);
 int main(int argc, char **argv) {
 	char *line_ptr = NULL, target1, target2;
 	size_t n = 0, sum = 0;
-	ssize_t len, digit;
-	unsigned pos, result;
+	ssize_t len;
 	FILE *in_file = fopen(argv[1], "r");
 	
 	while ( (len = getline(&line_ptr, &n, in_file)) != -1) {
