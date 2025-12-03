@@ -1,0 +1,1 @@
+int main(int c,char **v){FILE *f=fopen(v[1],"r");char *l=NULL;size_t n=0,d=50,p=0,w=0;while(getline(&l,&n,f)>0){for(c=0;c<atoi(l+1);c++){if(*l=='L')d=(d+99)%100;else d=(d+1)%100;if(!d)w++;}if(!d)p++;}printf("%d\n%d\n",p,w);}

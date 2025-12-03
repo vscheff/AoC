@@ -1,0 +1,39 @@
+while (getline(&line, &n, infile) > 1) {
+        map = realloc(map, (map_height + 1) * sizeof(*map));
+        damaged = realloc(damaged, (map_height + 1) * sizeof(*damaged));
+        num_ptr = line;
+        line = strsep(&num_ptr, " ");
+        map[map_height] = malloc((num_ptr - line) * 5 * sizeof(char));
+
+        for (unsigned i = 0; i < 5; i++) {
+                str_ptr = strcpy(map[map_height] + (num_ptr - line) * i, line);
+                unsigned j;
+
+                if (i < 4) {
+                        for (j = 0; str_ptr[j]; j++);
+                        str_ptr[j] = '?';
+                }
+        }
+
+        str_ptr = num_ptr;
+
+        unsigned num_damaged = 0;
+        damaged[map_height] = NULL;
+
+        while (str_ptr) {
+                num_ptr = strsep(&str_ptr, ",");
+                damaged[map_height] = realloc(damaged[map_height], ++num_damaged * sizeof(**damaged));
+                damaged[map_height][num_damaged - 1] = atoi(num_ptr);
+        }
+
+        damaged[map_height] = realloc(damaged[map_height], (num_damaged * 5 + 1) * sizeof(**damaged));
+
+        for (unsigned i = 1; i < 5; i++) {
+                for (unsigned j = 0; j < num_damaged; j++)
+                        damaged[map_height][j + i * num_damaged] = damaged[map_height][j];
+        }
+
+        damaged[map_height][num_damaged * 5] = -1;
+
+        map_height++;
+}
