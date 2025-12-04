@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
 	while ( (cols = getline(&line_ptr, &n, in_file)) > 1) {
 		map = realloc(map, sizeof(*map) * ++rows);
-		map[rows - 1] = malloc(cols - 1);
+		map[rows - 1] = malloc(cols);
 		line_ptr[cols - 1] = '\0';
 		strcpy(map[rows - 1], line_ptr);
 	}
